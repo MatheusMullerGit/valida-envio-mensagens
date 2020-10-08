@@ -11,6 +11,7 @@ dddEstado = const.get_dddEstado()
 idBroker = const.get_idBroker()
 
 mensagensValidas = []
+logErros = []
 
 ficheiro = open('exemplo.csv', 'r')
 reader = csv.reader(ficheiro)
@@ -56,6 +57,7 @@ for linha in reader:
         if temNoArray == False:                               
             mensagensValidas.append([idmensagem, ddd+celular, horario_envio, numIdBroker])   
     else:
+        logErros.append([idmensagem, msg_erro])
         print('id_mensagem: '+ idmensagem+' erros: '+msg_erro)    
     
 print('Mensagens válidas:')
@@ -64,7 +66,7 @@ for msgValidas in mensagensValidas:
     print(msgValidas[0]+';'+str(msgValidas[3]))
 
 func.geraResultado(mensagensValidas)
-    
+func.geraLogErros(logErros)
 
 
 

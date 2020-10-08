@@ -54,8 +54,16 @@ class funcoesGlobais:
         return True
     
         
+    def geraLogErros(self, arrayErros):
+        with open('logErros.csv', 'w', encoding='utf-8') as arquivo_csv:
+            for reg in arrayErros:
+                escrever = csv.writer(arquivo_csv, delimiter=';', lineterminator='\n')
+                escrever.writerow([reg[0],reg[1]])
+            print('LogErros gerado com sucesso')
+            
+
     def geraResultado(self, array):
-        with open('resultado.csv', 'a') as arquivo_csv:
+        with open('resultado.csv', 'w') as arquivo_csv:
             for reg in array:
                 escrever = csv.writer(arquivo_csv, delimiter=';', lineterminator='\n')
                 escrever.writerow([reg[0],reg[3]])
