@@ -39,6 +39,50 @@ h81b2696-8b62-4b8b-af82-586ce0875ebc;"Telefone está na Blacklist;"
 j81b2696-8b62-4b8b-af82-586ce0875ebc;"Telefone está na Blacklist;Mensagem possui mais de 140 caracteres;"
 ```
 
+## Regras
+
+O código main.py criará os arquivos de mensagens válidas e inválidas para envio conforme as regras descritas abaixo:
+
+* mensagens com telefone inválido deverão ser bloqueadas(DDD+NUMERO);
+* mensagens que estão na _blacklist_ deverão ser bloqueadas; _(ver blacklist)_
+* mensagens para o estado de São Paulo deverão ser bloqueadas;
+* mensagens com agendamento após as 19:59:59 deverão ser bloqueadas;
+* as mensagens com mais de 140 caracteres deverão ser bloqueadas;
+* caso possua mais de uma mensagem para o mesmo destino, apenas a mensagem apta com o menor horário deve ser considerada;
+* o id_broker será definido conforme a operadora; _(ver broker x operadora)_
+
+### Broker de envio
+
+Cada broker será responsável pelo envio de algumas operadoras, representado pela tabela abaixo:
+
+| ID_BROKER | OPERADORAS |
+|-----------|------------|
+|   1       |  VIVO, TIM |
+|   2       |  CLARO, OI |
+|   3       |  NEXTEL    |
+
+### Consulta de blacklist
+
+```
+https://front-test-pg.herokuapp.com/blacklist/:phone
+```
+Possíveis retornos:
+* Se retornar 200, está na blacklist.
+* Se retornar 404 não está na blacklist.
+
+### Número de telefone celular válido
+
+```
+ DDD + CELULAR
+```
+* DDD com 2 digitos;
+* DDD deve ser válido;
+* número celular deve conter 9 dígitos;
+* numero celular deve começar com 9;
+* o segundo dígito deve ser > 6;
+
+(Regras definidas por LeonardoPorto em https://github.com/pgmais/teste-dev)
+
 ## 🚀 Tecnologias Usadas 
 
 <img src="https://user-images.githubusercontent.com/18649504/66262823-725cd600-e7be-11e9-9cea-ea14305079db.png" width = "100">
