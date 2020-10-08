@@ -1,5 +1,7 @@
 import requests
 from datetime import datetime
+import csv
+
 
 class funcoesGlobais:
     def __init__(self):
@@ -51,10 +53,13 @@ class funcoesGlobais:
             return False
         return True
     
-    
-    def validaMensagemDuplicada(self, dataframe):
         
-        return
+    def geraResultado(self, array):
+        with open('resultado.csv', 'a') as arquivo_csv:
+            for reg in array:
+                escrever = csv.writer(arquivo_csv, delimiter=';', lineterminator='\n')
+                escrever.writerow([reg[0],reg[3]])
+            print('Arquivo gerado com sucesso')
 
     
 pass
